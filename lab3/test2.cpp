@@ -11,9 +11,7 @@ int main(){
     close(s);
 
     s = socket(AF_INET, SOCK_DGRAM, 0);
-    cout << "Socket ID:" << endl;
-
-
+    cout << "Socket ID:"<< s << endl;
     close(s);
     return 0;
 }
