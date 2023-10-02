@@ -31,7 +31,9 @@ int main(){
     ssize_t content_len;
     while ( true ){
         content_len = recvfrom(s, buf2, sizeof(buf2), 0, (struct sockaddr *)&sin, &sin_size); //소켓을 통해 데이터를 받음과 동시에 버퍼에 데이터를 저장하고 클라이언트 소켓의 주소 정보를 저장
-        cout << buf2 << endl;
+        if (content_len == -1){
+            cerr << strerror(errno) << endl; 
+        }
         sendto(s, buf2, content_len, 0, (struct sockaddr* )&sin, sin_size);
     }
 
