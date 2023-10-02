@@ -15,7 +15,16 @@ int main(){
 
     string buf = "Hello World2";
 
-    struct sockaddr_in sin;
+    struct sockaddr_in sin; //서버 소켓 주소 지정
+    memset(&sin, 0, sizeof(sin)); 
+    sin.sin_family = AF_INET;
+    sin.sin_port = htons(10128);
+    sin.sin_addr.s_addr = INADDR_ANY;
+    if ( bind(s, (struct sockaddr*) &sin, sizeof(sin) ) == -1 ){
+        cerr << strerror(errno) << endl;
+        return 0;
+    }
+
     memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
     sin.sin_port = htons(20128);
@@ -23,7 +32,7 @@ int main(){
 
     int numBytes = sendto(s, buf.c_str(), buf.length(), 0, (struct sockaddr*) & sin, sizeof(sin)); 
 
-    cout << "Sent:" << numBytes << endl;
+    cout << "Sent: " << numBytes << endl;
 
     char buf2[65536];
     memset(&sin, 0, sizeof(sin));
@@ -32,6 +41,14 @@ int main(){
 
     cout << "Recevied: " << numBytes << endl;
     cout << "From " << inet_ntoa(sin.sin_addr) << endl;
+    cout << "content: " << buf2 << endl;
+
+    memset(&sin, 0, sizeof(sin));
+    sin_size = sizeof(sin);
+    int result = getsockname(s, (struct sockaddr *) &sin, &sin_size); // 주소를 읽어서 가져옴
+    if(result == 0)
+        cout << "My addr: " << inet_ntoa(sin.sin_addr) << endl; //0.0.0.0 자기 네트워크 인터페이스 중 아무거나, 나갈 때 결정됨
+        cout << "My port: " << ntohs(sin.sin_port) <<endl;
 
     close(s);
     return 0;

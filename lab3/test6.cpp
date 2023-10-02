@@ -33,6 +33,13 @@ int main(){
     cout << "Recevied: " << numBytes << endl;
     cout << "From " << inet_ntoa(sin.sin_addr) << endl;
 
+    memset(&sin, 0, sizeof(sin));
+    sin_size = sizeof(sin);
+    int result = getsockname(s, (struct sockaddr *) &sin, &sin_size); // 주소를 읽어서 가져옴
+    if(result == 0)
+        cout << "My addr: " << inet_ntoa(sin.sin_addr) << endl; //0.0.0.0 자기 네트워크 인터페이스 중 아무거나, 나갈 때 결정됨
+        cout << "My port: " << ntohs(sin.sin_port) <<endl;
+
     close(s);
     return 0;
 }
