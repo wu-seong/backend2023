@@ -35,8 +35,7 @@ int main(){
     phone->set_number("02-100-1000");
     phone->set_type(Person::HOME);
 
-    const string serializedString =p->SerializeAsString();
-
+    const string serializedString = p->SerializeAsString();
 
     int numBytes = sendto(s, serializedString.c_str(), serializedString.length(), 0, (struct sockaddr*) & sin, sizeof(sin)); 
 
@@ -50,10 +49,12 @@ int main(){
     numBytes = recvfrom(s, buf2, sizeof(buf2), 0, (struct sockaddr*)&sin, &sin_size); //커널이 누구로 부터 데이터를 받을지를 써줌
     cout << "Recevied: " << numBytes << endl;
     cout << "From " << inet_ntoa(sin.sin_addr) << endl;
+    string rcv(buf2, numBytes);
+    p2-> ParseFromString(rcv);
 
-    p2-> ParseFromString(buf2);
     cout << "Name:" << p2-> name() <<endl;
     cout << "ID:" <<p2->id() << endl;
+
     for(int i = 0; i< p2->phones_size(); ++i){
         cout << "Type:" << p2->phones(i).type() << endl;
         cout << "Phone:"<< p2->phones(i).number() << endl;
