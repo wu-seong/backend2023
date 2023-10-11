@@ -1,0 +1,1 @@
+우리가 반복문 안에서 실행하는 accept, recv, send는 하는 동안 blocking되기 때문에 CPU 사용률을 떨어뜨릴 수 있다.
