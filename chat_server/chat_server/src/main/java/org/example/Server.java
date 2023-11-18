@@ -15,6 +15,7 @@ import mju.MessagePb;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import static java.lang.Thread.sleep;
 import static org.example.MessageUtility.getMessage;
 import static org.example.MessageUtility.getMessageSize;
 import static org.example.ServerMode.JSON;
@@ -73,7 +74,7 @@ public class Server {
                             break;
                         case PROTOBUF:
                             short messageSize = getMessageSize(client);
-                            if (messageSize <= 0) { //연결 종료 감지, FIN이면 read가 0을 반환
+                            if (messageSize < 0) { //연결 종료 감지, FIN이면 read가 -1을 반환
                                 clients.remove(client);
                                 key.cancel();
                                 client.close();
@@ -94,11 +95,12 @@ public class Server {
                                 }
                                 MessagePb.Type.MessageType messageType = type.getType();
                                 int number = messageType.getNumber();
+                                //sleep(1000);
                                 while (!binaryMessage.isSet()) {   //가끔씩 타입만 먼저 와서 읽는 경우가 있어서 그럴 때 다시 읽도록 반복
                                     messageSize = getMessageSize(client);
                                     requestMessage = getMessage(client, messageSize);
                                     binaryMessage.setBinary(typeMessage, requestMessage);
-                                    if (number == 1 || number == 4 || number == 6) { //request body가 원래 없는 것들은 다시 일기 않도록
+                                    if (number == 1 || number == 4 || number == 6) { //request body가 원래 없는 것들은 다시 읽지 않도록
                                         break;
                                     }
                                 }

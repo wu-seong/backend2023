@@ -1,6 +1,9 @@
 package org.example;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
@@ -17,6 +20,10 @@ public class MessageUtility {
         short size = 0;
         ByteBuffer lengthBuffer = ByteBuffer.allocate(2);
         int readLength = client.read(lengthBuffer);
+        if(readLength == -1){
+            System.out.println("FIN");
+            return -1;
+        }
         lengthBuffer.flip(); // 다시 처음부터 읽을 수 있도록
         if (readLength == 2) { //정상적으로 사이즈 정보를 읽어옴)
             size = lengthBuffer.getShort();
