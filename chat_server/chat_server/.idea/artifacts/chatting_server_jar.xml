@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="chatting_server:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/chatting_server_jar</output-path>
+    <root id="archive" name="chatting_server.jar">
+      <element id="module-output" name="chatting_server" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/json/json/20180813/json-20180813.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/3.20.3/protobuf-java-3.20.3.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

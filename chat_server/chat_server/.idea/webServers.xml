@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4d78b0f0-a950-44c1-8161-c01e3e04bca3" name="chat_server_java">
+        <fileTransfer rootFolder="/home/F2023/u60192234/git/backend2023/chat_server" accessType="SFTP" host="sysdesignlab.mju.ac.kr" port="10022" sshConfigId="bf99b210-23e8-4d49-9aa8-e6c8e011950c" sshConfig="u60192234@sysdesignlab.mju.ac.kr:10022 agent" authAgent="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
