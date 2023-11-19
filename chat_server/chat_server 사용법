@@ -4,4 +4,4 @@ chat_server 디렉토리의 out/artifacts/chatting_server_jar에 빌드된 jar �
  1. worker thread 들의 개수 
  2. 서버의 모드 입니다. 서버의 mode는 숫자 1, 2로 설정할 수 있으며 1은 JSON, 2는 Protobuf 모드입니다.
 
-예를 들면 java -jar 10 1  -> worker thread는 10개 JSON 모드로 실행합니다.
+예를 들면 java -jar chatting_server.jar 10 1  -> worker thread는 10개 JSON 모드로 실행합니다.
