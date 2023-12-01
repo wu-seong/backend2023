@@ -19,7 +19,7 @@ naver_redirect_uri = 'http://localhost:8000/auth'
   여기 지정된 url 이 http://localhost:8000/auth 처럼 /auth 인 경우
   아래 onOAuthAuthorizationCodeRedirected() 에 @app.route('/auth') 태깅한 것처럼 해야 함
 '''
-r = redis.Redis(host='43.202.50.69', port=6379, db=0)
+r = redis.Redis(host='43.202.50.69', port=6379, db=0, password='60192234')
 @app.route('/')
 def home():
     # 쿠기를 통해 이전에 로그인 한 적이 있는지를 확인한다.
